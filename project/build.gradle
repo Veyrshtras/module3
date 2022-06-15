@@ -54,7 +54,8 @@ allprojects{
         runtimeOnly 'org.postgresql:postgresql:42.3.6'
         testImplementation 'com.h2database:h2:2.1.212'
         testImplementation 'org.mockito:mockito-junit-jupiter:4.6.1'
-
+// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+        implementation 'org.modelmapper:modelmapper:3.1.0'
         testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
     }
 

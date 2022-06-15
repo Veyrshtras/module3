@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class UserDto extends RepresentationModel<UserDto> {
     private List<Order> orders;
 
     public static UserDto toDto(User user){
-        return new UserDto(user.getId(), user.getName(), user.getOrders());
+        return new ModelMapper().map(user, UserDto.class);
+//        return new UserDto(user.getId(), user.getName(), user.getOrders());
     }
 }

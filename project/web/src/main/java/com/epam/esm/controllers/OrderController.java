@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("api/v1/orders")
 public class OrderController {
@@ -20,8 +22,11 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity getAll(@RequestParam int pageSize){
-        return ResponseEntity.ok(service.getAll(Pageable.ofSize(pageSize)));
+    public ResponseEntity getAll(Pageable pageable){
+        return ResponseEntity.ok(service.getAll(pageable).stream()
+                .map(OrderDto::toDto)
+                .peek(dto -> new OrderHateoasAdder().addLink(dto))
+                .collect(Collectors.toList()));
     }
 
     @GetMapping("{id}")
@@ -44,8 +49,12 @@ public class OrderController {
     }
 
     @GetMapping("/get-by-user-id")
-    public ResponseEntity getOrdersByUserId(@RequestParam Long userId, @RequestParam int pageSize){
-        return ResponseEntity.ok(service.getOrdersByUserId(userId, Pageable.ofSize(pageSize)));
+    public ResponseEntity getOrdersByUserId(@RequestParam Long userId, Pageable pageable){
+        return ResponseEntity.ok(service.getOrdersByUserId(userId, pageable)
+                .stream()
+                .map(OrderDto::toDto)
+                .peek(dto -> new OrderHateoasAdder().addLink(dto))
+                .collect(Collectors.toList()));
     }
 
 

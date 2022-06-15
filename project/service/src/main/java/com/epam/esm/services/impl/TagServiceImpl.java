@@ -64,7 +64,7 @@ public class TagServiceImpl implements TagService {
             throw new IncorrectParameterException(er);
         }
 
-        if (repository.getById(id)==null){
+        if (!repository.findById(id).isPresent()){
             throw new NoSuchEntityException(ExceptionMessagesKeys.TAG_NOT_FOUND);
         }
         repository.deleteById(id);
@@ -79,7 +79,7 @@ public class TagServiceImpl implements TagService {
             throw new IncorrectParameterException(er);
         }
 
-        if (repository.getById(id)==null){
+        if (!repository.findById(id).isPresent()){
             throw new NoSuchEntityException(ExceptionMessagesKeys.TAG_NOT_FOUND);
         }
         return repository.findById(id).get();

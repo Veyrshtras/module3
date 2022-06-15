@@ -1,5 +1,6 @@
 package com.epam.esm.service;
 
+import com.epam.esm.EntitiesTest;
 import com.epam.esm.dtos.GiftCertificateDto;
 import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Tag;
@@ -31,48 +32,33 @@ public class GiftCertificateServiceTest {
         this.service = service;
     }
 
-    private static final Tag TAG_2 = new Tag(2, "tagName3");
-
-    private static final GiftCertificate GIFT_CERTIFICATE_1 = new GiftCertificate(1, "giftCertificate1",
-            "description1", new BigDecimal("10.10"), 1, LocalDateTime.parse("2020-08-29T06:12:15"),
-            LocalDateTime.parse("2020-08-29T06:12:15"), Arrays.asList(new Tag(2, "tagName3"), new Tag(5, "tagName2")));
-    private static final GiftCertificate GIFT_CERTIFICATE_2 = new GiftCertificate(2, "giftCertificate3",
-            "description3", new BigDecimal("30.30"), 3, LocalDateTime.parse("2019-08-29T06:12:15"),
-            LocalDateTime.parse("2019-08-29T06:12:15"), Collections.singletonList(new Tag(2, "tagName3")));
-    private static final GiftCertificate GIFT_CERTIFICATE_3 = new GiftCertificate(3, "giftCertificate2",
-            "description2", new BigDecimal("20.20"), 2, LocalDateTime.parse("2018-08-29T06:12:15"),
-            LocalDateTime.parse("2018-08-29T06:12:15"), Collections.singletonList(new Tag(3, "tagName5")));
-
-
-
-
     @Test
-    public void getAll() {
+    public void getAllTest() {
         Page<GiftCertificate> actual = service.getAll(Pageable.ofSize(3));
-        Page<GiftCertificate> expected = (PageImpl) Arrays.asList(GIFT_CERTIFICATE_1,
-                GIFT_CERTIFICATE_2, GIFT_CERTIFICATE_3);
+        Page<GiftCertificate> expected = (PageImpl) Arrays.asList(EntitiesTest.GIFT_CERTIFICATE_1,
+                EntitiesTest.GIFT_CERTIFICATE_2, EntitiesTest.GIFT_CERTIFICATE_3);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getById() {
-        Optional<GiftCertificate> actual = Optional.of(service.getById(GIFT_CERTIFICATE_2.getId()));
-        Optional<GiftCertificate> expected = Optional.of(GIFT_CERTIFICATE_2);
+    public void getByIdTest() {
+        Optional<GiftCertificate> actual = Optional.of(service.getById(EntitiesTest.GIFT_CERTIFICATE_2.getId()));
+        Optional<GiftCertificate> expected = Optional.of(EntitiesTest.GIFT_CERTIFICATE_2);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void insert(){
+    public void insertTest(){
 
-        Assertions.assertEquals(service.insert(GiftCertificateDto.toDto(GIFT_CERTIFICATE_2)), GIFT_CERTIFICATE_2);
-        Assertions.assertEquals(service.insert(GiftCertificateDto.toDto(GIFT_CERTIFICATE_1)), GIFT_CERTIFICATE_1);
-        Assertions.assertEquals(service.insert(GiftCertificateDto.toDto(GIFT_CERTIFICATE_3)), GIFT_CERTIFICATE_3);
+        Assertions.assertEquals(service.insert(GiftCertificateDto.toDto(EntitiesTest.GIFT_CERTIFICATE_2)), EntitiesTest.GIFT_CERTIFICATE_2);
+        Assertions.assertEquals(service.insert(GiftCertificateDto.toDto(EntitiesTest.GIFT_CERTIFICATE_1)), EntitiesTest.GIFT_CERTIFICATE_1);
+        Assertions.assertEquals(service.insert(GiftCertificateDto.toDto(EntitiesTest.GIFT_CERTIFICATE_3)), EntitiesTest.GIFT_CERTIFICATE_3);
     }
 
     @Test
-    public void delete(){
+    public void deleteTest(){
 
         Assertions.assertTrue(service.delete(1L));
         Assertions.assertTrue(service.delete(2L));
@@ -82,10 +68,10 @@ public class GiftCertificateServiceTest {
     }
 
     @Test
-    public void searchGiftCertificateByTags() {
+    public void searchGiftCertificateByTagsTest() {
 
-        Page<GiftCertificate> actual = service.searchGiftCertificateByTags(Arrays.asList(TAG_2), Pageable.ofSize(3));
-        Page<GiftCertificate> expected = (PageImpl) Arrays.asList(GIFT_CERTIFICATE_1, GIFT_CERTIFICATE_2);
+        Page<GiftCertificate> actual = service.searchGiftCertificateByTags(Arrays.asList(EntitiesTest.TAG_2), Pageable.ofSize(3));
+        Page<GiftCertificate> expected = (PageImpl) Arrays.asList(EntitiesTest.GIFT_CERTIFICATE_1, EntitiesTest.GIFT_CERTIFICATE_2);
 
         assertEquals(expected, actual);
     }

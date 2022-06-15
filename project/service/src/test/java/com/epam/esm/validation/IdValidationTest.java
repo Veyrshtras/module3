@@ -15,14 +15,14 @@ public class IdValidationTest {
     private static final long CORRECT_ID = 15;
 
     @Test
-    public void testValidateId_incorrectData() {
+    public void validateId_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         IdValidation.validateId(INCORRECT_ID, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateId_correctData() {
+    public void validateId_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         IdValidation.validateId(CORRECT_ID, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());

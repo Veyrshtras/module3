@@ -1,5 +1,6 @@
 package com.epam.esm.service;
 
+import com.epam.esm.EntitiesTest;
 import com.epam.esm.entities.User;
 import com.epam.esm.services.UserService;
 import org.junit.Test;
@@ -24,22 +25,19 @@ public class UserServiceTest {
         this.service = service;
     }
 
-    private static final User USER_1 = new User(1, "name1");
-    private static final User USER_2 = new User(2, "name2");
-
     @Test
-    public void getAll(){
+    public void getAllTest(){
         List<User> actual = (List<User>) service.getAll(Pageable.ofSize(5));
-        List<User> expected = Arrays.asList(USER_1, USER_2);
+        List<User> expected = Arrays.asList(EntitiesTest.USER_1, EntitiesTest.USER_2);
 
         assertEquals(expected, actual);
     }
 
 
     @Test
-    public void getById(){
-        Optional<User> actual = Optional.of(service.getById(USER_2.getId()));
-        Optional<User> expected = Optional.of(USER_2);
+    public void getByIdTest(){
+        Optional<User> actual = Optional.of(service.getById(EntitiesTest.USER_2.getId()));
+        Optional<User> expected = Optional.of(EntitiesTest.USER_2);
 
         assertEquals(expected, actual);
     }

@@ -16,28 +16,28 @@ public class TagValidationTest {
     private static final Tag CORRECT_TAG = new Tag(CORRECT_NAME);
 
     @Test
-    public void testValidate_incorrectData() {
+    public void validate_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         TagValidation.validate(INCORRECT_TAG, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidate_correctData() {
+    public void validate_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         TagValidation.validate(CORRECT_TAG, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateName_incorrectData() {
+    public void validateName_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         TagValidation.validateName(INCORRECT_NAME, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateName_correctData() {
+    public void validateName_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         TagValidation.validateName(CORRECT_NAME, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());

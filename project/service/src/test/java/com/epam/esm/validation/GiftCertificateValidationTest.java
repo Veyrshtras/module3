@@ -31,42 +31,42 @@ public class GiftCertificateValidationTest {
             LocalDateTime.parse("2020-08-29T06:12:15.156"), CORRECT_TAGS);
 
     @Test
-    public void testValidate_incorrectData() {
+    public void validate_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         GiftCertificateValidation.validate(INCORRECT_GIFT_CERTIFICATE, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidate_correctData() {
+    public void validate_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         GiftCertificateValidation.validate(CORRECT_GIFT_CERTIFICATE, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateForUpdate_incorrectData() {
+    public void validateForUpdate_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         GiftCertificateValidation.validateForUpdate(INCORRECT_GIFT_CERTIFICATE, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateForUpdate_correctData() {
+    public void validateForUpdate_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         GiftCertificateValidation.validateForUpdate(CORRECT_GIFT_CERTIFICATE, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateListOfTags_incorrectData() {
+    public void validateListOfTags_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         GiftCertificateValidation.validateListOfTags(INCORRECT_TAGS, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidateListOfTags_correctData() {
+    public void validateListOfTags_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         GiftCertificateValidation.validateListOfTags(CORRECT_TAGS, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());

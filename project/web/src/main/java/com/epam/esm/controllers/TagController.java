@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1/tags")
 public class TagController {
@@ -27,8 +29,12 @@ public class TagController {
     }
 
     @GetMapping
-    public ResponseEntity getAll(@RequestParam int pageSize){
-        return ResponseEntity.ok(service.getAll(Pageable.ofSize(pageSize)));
+    public ResponseEntity getAll(Pageable pageable){
+        return ResponseEntity.ok(service.getAll(pageable)
+                .stream()
+                .map(TagDto::toDto)
+                .peek(dto -> new TagHateoasAdder().addLink(dto))
+                .collect(Collectors.toList()));
     }
 
     @GetMapping("{id}")

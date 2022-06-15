@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
         if (!repository.findById(id).isPresent()){
             throw new NoSuchEntityException();
         }
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     @Override

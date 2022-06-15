@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
             throw new NoSuchEntityException(ExceptionMessagesKeys.USER_NOT_FOUND);
         }
 
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     @Override

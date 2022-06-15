@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
@@ -28,13 +29,13 @@ public class GiftCertificateDto extends RepresentationModel<GiftCertificateDto> 
     private List<TagDto> tags;
 
     public static GiftCertificateDto toDto(GiftCertificate certificate) {
-        return new GiftCertificateDto(certificate.getId(), certificate.getName(), certificate.getDescription(), certificate.getPrice(),
-                certificate.getDuration(), certificate.getLastUpdateDate(), certificate.getTags().stream()
-                .map(TagDto::toDto)
-                .collect(Collectors.toList()));
+        return new ModelMapper().map(certificate, GiftCertificateDto.class);
+//        return new GiftCertificateDto(certificate.getId(), certificate.getName(), certificate.getDescription(), certificate.getPrice(),
+//                certificate.getDuration(), certificate.getLastUpdateDate(), certificate.getTags().stream()
+//                .map(TagDto::toDto)
+//                .collect(Collectors.toList()));
     }
 
-    // TODO: 15.06.2022 I should check ModelMapper for converting  
     public static GiftCertificate fromDto(GiftCertificateDto dto){
         GiftCertificate obj=new GiftCertificate();
         obj.setName(dto.getName());

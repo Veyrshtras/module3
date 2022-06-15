@@ -15,7 +15,6 @@ public class UserHateoasAdder implements HateoasAdder<UserDto> {
 
     @Override
     public void addLink(UserDto userDto) {
-
         userDto.add(linkTo(methodOn(CONTROLLER).getById(userDto.getId())).withSelfRel());
     }
 }

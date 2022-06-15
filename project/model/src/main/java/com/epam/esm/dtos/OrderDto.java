@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.engine.spi.SessionLazyDelegator;
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.RepresentationModel;
 
 
@@ -28,8 +29,9 @@ public class OrderDto extends RepresentationModel<OrderDto> {
     private Long certificateId;
 
     public static OrderDto toDto(Order order){
-        return new OrderDto(order.getId(), order.getCost(), order.getPurchaseTime(),
-                order.getUser().getId(), order.getCertificate().getId());
+        return new ModelMapper().map(order, OrderDto.class);
+//        return new OrderDto(order.getId(), order.getCost(), order.getPurchaseTime(),
+//                order.getUser().getId(), order.getCertificate().getId());
     }
     public static Order fromDto(OrderDto order){
         Order item=new Order();

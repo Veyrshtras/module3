@@ -26,14 +26,14 @@ public class OrderValidationTest {
                     LocalDateTime.parse("2018-08-29T06:12:15"), LocalDateTime.parse("2018-08-29T06:12:15"), null));
 
     @Test
-    public void testValidate_incorrectData() {
+    public void validate_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         OrderValidation.validate(INCORRECT_ORDER, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
-    public void testValidate_correctData() {
+    public void validate_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
         OrderValidation.validate(CORRECT_ORDER, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());

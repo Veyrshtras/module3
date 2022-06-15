@@ -40,8 +40,6 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     @Override
     @Transactional
     public Page<GiftCertificate> getAll(Pageable pageable) {
-        // TODO: 15.06.2022 implement AddHataoes for allGet methods
-        // TODO: 15.06.2022 implement of pageable obj such as pageNumber
         return repository.findAll(pageable);
     }
 
@@ -58,8 +56,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         if(!repository.findById(id).isPresent()){
             throw new NoSuchEntityException(GIFT_CERTIFICATE_NOT_FOUND);
         }
-        // TODO: 15.06.2022 i should use findById
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     @Override

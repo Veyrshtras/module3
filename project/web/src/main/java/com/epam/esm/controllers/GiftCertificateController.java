@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/certificates")
@@ -33,8 +34,11 @@ public class GiftCertificateController {
 
 
     @GetMapping
-    public ResponseEntity getAll(@RequestParam int pageSize){
-        return ResponseEntity.ok(service.getAll(Pageable.ofSize(pageSize)));
+    public ResponseEntity getAll(Pageable pageable){
+        return ResponseEntity.ok(service.getAll(pageable).stream()
+                        .map(GiftCertificateDto::toDto)
+                        .peek(dto -> new GiftCertificateHateoasAdder().addLink(dto))
+                        .collect(Collectors.toList()));
     }
 
     @PostMapping
@@ -69,8 +73,12 @@ public class GiftCertificateController {
 
 
     @GetMapping("/search")
-    public ResponseEntity searchGiftCertificateByTags(@RequestBody List<Tag> tags, @RequestParam int pageSize ){
-        return ResponseEntity.ok(service.searchGiftCertificateByTags(tags, Pageable.ofSize(pageSize)));
+    public ResponseEntity searchGiftCertificateByTags(@RequestBody List<Tag> tags, Pageable pageable ){
+        return ResponseEntity.ok(service.searchGiftCertificateByTags(tags, pageable)
+                .stream()
+                .map(GiftCertificateDto::toDto)
+                .peek(dto -> new GiftCertificateHateoasAdder().addLink(dto))
+                .collect(Collectors.toList()));
     }
 
 }
