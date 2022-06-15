@@ -1,0 +1,6 @@
+rootProject.name = 'REST-API-Advanced-Module3'
+include 'model'
+include 'persistence'
+include 'service'
+include 'web'
+
