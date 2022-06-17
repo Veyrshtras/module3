@@ -1,4 +1,5 @@
 package com.epam.esm.entities;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

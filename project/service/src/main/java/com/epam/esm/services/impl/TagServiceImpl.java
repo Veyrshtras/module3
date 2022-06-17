@@ -88,7 +88,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public TagDto getMostPopularTagOfUserWithHighestCostOfAllOrders() {
 
-        return TagDto.toDto((Tag) DBConfig.entityManager
+        return TagDto.toDto((Tag) new DBConfig().getEntityManager()
                 .createQuery( FIND_MOST_WIDELY_USED_TAG_OF_USER_WITH_HIGHEST_COST_OF_ALL_ORDERS_QUERY)
                 .getResultList()
                 .stream().findFirst().get());

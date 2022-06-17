@@ -1,12 +1,12 @@
 package com.epam.esm.dtos;
 
+import com.epam.esm.configs.DBConfig;
 import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
@@ -29,7 +29,7 @@ public class GiftCertificateDto extends RepresentationModel<GiftCertificateDto> 
     private List<TagDto> tags;
 
     public static GiftCertificateDto toDto(GiftCertificate certificate) {
-        return new ModelMapper().map(certificate, GiftCertificateDto.class);
+        return new DBConfig().modelMapper().map(certificate, GiftCertificateDto.class);
 //        return new GiftCertificateDto(certificate.getId(), certificate.getName(), certificate.getDescription(), certificate.getPrice(),
 //                certificate.getDuration(), certificate.getLastUpdateDate(), certificate.getTags().stream()
 //                .map(TagDto::toDto)
@@ -37,15 +37,15 @@ public class GiftCertificateDto extends RepresentationModel<GiftCertificateDto> 
     }
 
     public static GiftCertificate fromDto(GiftCertificateDto dto){
-        GiftCertificate obj=new GiftCertificate();
-        obj.setName(dto.getName());
-        obj.setDescription(dto.getDescription());
-        obj.setPrice(dto.getPrice());
-        obj.setDuration(dto.getDuration());
-        if(dto.getTags()!=null)
-            obj.setTags(dto.getTags().stream()
-                .map(tagDto -> new Tag(tagDto.getName()))
-                .collect(Collectors.toList()));
-        return obj;
+//        GiftCertificate obj=new GiftCertificate();
+//        obj.setName(dto.getName());
+//        obj.setDescription(dto.getDescription());
+//        obj.setPrice(dto.getPrice());
+//        obj.setDuration(dto.getDuration());
+//        if(dto.getTags()!=null)
+//            obj.setTags(dto.getTags().stream()
+//                .map(tagDto -> new Tag(tagDto.getName()))
+//                .collect(Collectors.toList()));
+        return new DBConfig().modelMapper().map(dto, GiftCertificate.class);
     }
 }

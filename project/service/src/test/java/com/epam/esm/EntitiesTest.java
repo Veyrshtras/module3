@@ -4,7 +4,6 @@ import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Order;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.entities.User;
-import jdk.nashorn.internal.objects.annotations.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

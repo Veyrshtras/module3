@@ -1,5 +1,6 @@
 package com.epam.esm.dtos;
 
+import com.epam.esm.configs.DBConfig;
 import com.epam.esm.entities.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +24,9 @@ public class TagDto extends RepresentationModel<TagDto> {
     }
 
     public static Tag fromDto(TagDto dto){
-        Tag tag=new Tag();
-        tag.setId(dto.getId());
-        tag.setName(dto.getName());
-        return tag;
+//        Tag tag=new Tag();
+//        tag.setId(dto.getId());
+//        tag.setName(dto.getName());
+        return new DBConfig().modelMapper().map(dto, Tag.class);
     }
 }
