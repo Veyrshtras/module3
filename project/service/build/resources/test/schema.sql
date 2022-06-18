@@ -47,9 +47,9 @@ create table if not exists users
     );
 
 -- -----------------------------------------------------
--- Table module3test.orders
+-- Table module3test.order
 -- -----------------------------------------------------
-create table if not exists orders
+create table if not exists order
 (
     id                  bigint  auto_increment,
     price               decimal(8, 2)  not null,

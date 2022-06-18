@@ -3,6 +3,7 @@ package com.epam.esm.controllers;
 import com.epam.esm.dtos.UserDto;
 import com.epam.esm.hateoas.impl.UserHateoasAdder;
 import com.epam.esm.services.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ public class UserController {
 
     private final UserService service;
     private final UserHateoasAdder hateoasAdder;
+    private final ModelMapper mapper;
 
-    public UserController(UserService service, UserHateoasAdder hateoasAdder) {
+    public UserController(UserService service, UserHateoasAdder hateoasAdder, ModelMapper mapper) {
         this.service = service;
         this.hateoasAdder = hateoasAdder;
+        this.mapper = mapper;
     }
 
     @GetMapping("/fillTable")
@@ -32,14 +35,14 @@ public class UserController {
     public ResponseEntity getAll(Pageable pageable){
         return ResponseEntity.ok(service.getAll(pageable)
                 .stream()
-                .map(UserDto::toDto)
+                .map(user -> mapper.map(user, UserDto.class))
                 .peek(dto -> new UserHateoasAdder().addLink(dto))
                 .collect(Collectors.toList()));
     }
 
     @GetMapping("{id}")
     public ResponseEntity getById(@PathVariable Long id){
-        UserDto userDto=UserDto.toDto(service.getById(id));
+        UserDto userDto=mapper.map(service.getById(id), UserDto.class);
         hateoasAdder.addLink(userDto);
         return ResponseEntity.ok(userDto);
     }

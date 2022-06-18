@@ -5,6 +5,7 @@ import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.hateoas.impl.GiftCertificateHateoasAdder;
 import com.epam.esm.services.GiftCertificateService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,12 @@ public class GiftCertificateController {
 
     private final GiftCertificateService service;
     private final GiftCertificateHateoasAdder hateoasAdder;
+    private final ModelMapper mapper;
 
-    public GiftCertificateController(GiftCertificateService service, GiftCertificateHateoasAdder hateoasAdder) {
+    public GiftCertificateController(GiftCertificateService service, GiftCertificateHateoasAdder hateoasAdder, ModelMapper mapper) {
         this.service = service;
         this.hateoasAdder = hateoasAdder;
+        this.mapper = mapper;
     }
 
     @GetMapping("/fillTable")
@@ -36,7 +39,7 @@ public class GiftCertificateController {
     @GetMapping
     public ResponseEntity getAll(Pageable pageable){
         return ResponseEntity.ok(service.getAll(pageable).stream()
-                        .map(GiftCertificateDto::toDto)
+                        .map(giftCertificate -> mapper.map(giftCertificate, GiftCertificateDto.class))
                         .peek(dto -> new GiftCertificateHateoasAdder().addLink(dto))
                         .collect(Collectors.toList()));
     }
@@ -44,7 +47,7 @@ public class GiftCertificateController {
     @PostMapping
     public ResponseEntity insert(@RequestBody GiftCertificateDto dto){
         GiftCertificate giftCertificate=service.insert(dto);
-        GiftCertificateDto giftCertificateDto=GiftCertificateDto.toDto(giftCertificate);
+        GiftCertificateDto giftCertificateDto= mapper.map(giftCertificate, GiftCertificateDto.class);
         hateoasAdder.addLink(giftCertificateDto);
         return ResponseEntity.ok(giftCertificateDto);
     }
@@ -66,17 +69,18 @@ public class GiftCertificateController {
     public ResponseEntity getById(@PathVariable Long id){
 
         GiftCertificate giftCertificate=service.getById(id);
-        GiftCertificateDto giftCertificateDto=GiftCertificateDto.toDto(giftCertificate);
+        GiftCertificateDto giftCertificateDto=mapper.map(giftCertificate, GiftCertificateDto.class);
         hateoasAdder.addLink(giftCertificateDto);
         return ResponseEntity.ok(giftCertificateDto);
     }
 
 
+    // TODO: 17.06.2022 I fix it. 
     @GetMapping("/search")
     public ResponseEntity searchGiftCertificateByTags(@RequestBody List<Tag> tags, Pageable pageable ){
         return ResponseEntity.ok(service.searchGiftCertificateByTags(tags, pageable)
                 .stream()
-                .map(GiftCertificateDto::toDto)
+                .map(giftCertificate -> mapper.map(giftCertificate, GiftCertificateDto.class))
                 .peek(dto -> new GiftCertificateHateoasAdder().addLink(dto))
                 .collect(Collectors.toList()));
     }

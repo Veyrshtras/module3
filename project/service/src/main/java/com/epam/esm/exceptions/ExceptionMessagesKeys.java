@@ -1,5 +1,6 @@
 package com.epam.esm.exceptions;
 
+import com.epam.esm.entities.Order;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -31,7 +32,7 @@ public class ExceptionMessagesKeys {
     public static final String GIFT_CERTIFICATE_EXIST = "certificate.alreadyExist";
 
     /**
-     * Keys for exception messages associated with {@link com.epam.esm.entities.Order}.
+     * Keys for exception messages associated with {@link Order}.
      */
     public static final String BAD_USER_ID = "order.badUserID";
     public static final String BAD_GIFT_CERTIFICATE_ID = "order.badGiftCertificateID";

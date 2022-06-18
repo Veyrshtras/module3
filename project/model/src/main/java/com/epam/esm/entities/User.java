@@ -17,7 +17,7 @@ public class User extends BaseEntity{
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Order> orders;
+    private List<Order> order;
 
     public User(int i, String name1) {
         super();
@@ -25,4 +25,5 @@ public class User extends BaseEntity{
     public User(){
 
     }
+
 }

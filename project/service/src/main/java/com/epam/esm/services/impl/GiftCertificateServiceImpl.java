@@ -10,10 +10,10 @@ import com.epam.esm.services.GiftCertificateService;
 import com.epam.esm.validations.GiftCertificateValidation;
 import com.epam.esm.validations.IdValidation;
 import com.epam.esm.validations.TagValidation;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import static com.epam.esm.exceptions.ExceptionMessagesKeys.*;
@@ -26,9 +26,11 @@ import java.util.stream.Collectors;
 public class GiftCertificateServiceImpl implements GiftCertificateService {
 
     private final GiftCertificateRepository repository;
+    private final ModelMapper mapper;
 
-    public GiftCertificateServiceImpl(GiftCertificateRepository repository) {
+    public GiftCertificateServiceImpl(GiftCertificateRepository repository, ModelMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
 
@@ -64,7 +66,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     public GiftCertificate insert(GiftCertificateDto dto) {
 
         ExceptionResult er=new ExceptionResult();
-        GiftCertificate giftCertificate=GiftCertificateDto.fromDto(dto);
+        GiftCertificate giftCertificate=mapper.map(dto, GiftCertificate.class);
 
         GiftCertificateValidation.validate(giftCertificate, er);
 
@@ -84,7 +86,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     public GiftCertificateDto update(Long id, GiftCertificateDto dto) {
 
         ExceptionResult er=new ExceptionResult();
-        GiftCertificate giftCertificate=GiftCertificateDto.fromDto(dto);
+        GiftCertificate giftCertificate=mapper.map(dto, GiftCertificate.class);
         GiftCertificateValidation.validateForUpdate(giftCertificate, er);
         if (!er.getExceptionMessages().isEmpty()){
             throw new IncorrectParameterException(er);
@@ -103,11 +105,11 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         updateCert.setPrice(dto.getPrice());
         updateCert.setDuration(dto.getDuration());
         updateCert.setLastUpdateDate(LocalDateTime.now());
-        return GiftCertificateDto.toDto(repository.save(updateCert));
+        return mapper.map(repository.save(updateCert), GiftCertificateDto.class);
     }
 
     @Override
-//    @Transactional
+    @Transactional
     public boolean delete(Long id) {
         ExceptionResult er=new ExceptionResult();
         IdValidation.validateId(id, er);

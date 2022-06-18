@@ -1,5 +1,6 @@
 package com.epam.esm.validation;
 
+import com.epam.esm.EntitiesForValidationsTest;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.exceptions.ExceptionResult;
 import com.epam.esm.validations.TagValidation;
@@ -10,36 +11,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TagValidationTest {
 
-    private static final String INCORRECT_NAME = "qw";
-    private static final String CORRECT_NAME = "tagName";
-    private static final Tag INCORRECT_TAG = new Tag(INCORRECT_NAME);
-    private static final Tag CORRECT_TAG = new Tag(CORRECT_NAME);
 
     @Test
     public void validate_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
-        TagValidation.validate(INCORRECT_TAG, exceptionResult);
+        TagValidation.validate(EntitiesForValidationsTest.INCORRECT_TAG, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
     public void validate_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
-        TagValidation.validate(CORRECT_TAG, exceptionResult);
+        TagValidation.validate(EntitiesForValidationsTest.CORRECT_TAG, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
     public void validateName_incorrectDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
-        TagValidation.validateName(INCORRECT_NAME, exceptionResult);
+        TagValidation.validateName(EntitiesForValidationsTest.INCORRECT_NAME, exceptionResult);
         assertFalse(exceptionResult.getExceptionMessages().isEmpty());
     }
 
     @Test
     public void validateName_correctDataTest() {
         ExceptionResult exceptionResult = new ExceptionResult();
-        TagValidation.validateName(CORRECT_NAME, exceptionResult);
+        TagValidation.validateName(EntitiesForValidationsTest.CORRECT_NAME, exceptionResult);
         assertTrue(exceptionResult.getExceptionMessages().isEmpty());
     }
 }

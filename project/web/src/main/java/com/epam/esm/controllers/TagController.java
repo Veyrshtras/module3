@@ -3,6 +3,7 @@ package com.epam.esm.controllers;
 import com.epam.esm.dtos.TagDto;
 import com.epam.esm.hateoas.impl.TagHateoasAdder;
 import com.epam.esm.services.TagService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ public class TagController {
 
     private final TagService service;
     private final TagHateoasAdder hateoasAdder;
+    private final ModelMapper mapper;
 
-    public TagController(TagService service, TagHateoasAdder hateoasAdder) {
+    public TagController(TagService service, TagHateoasAdder hateoasAdder, ModelMapper mapper) {
         this.service = service;
         this.hateoasAdder = hateoasAdder;
+        this.mapper = mapper;
     }
 
     @GetMapping("/fillTable")
@@ -32,21 +35,21 @@ public class TagController {
     public ResponseEntity getAll(Pageable pageable){
         return ResponseEntity.ok(service.getAll(pageable)
                 .stream()
-                .map(TagDto::toDto)
+                .map(tag -> mapper.map(tag, TagDto.class))
                 .peek(dto -> new TagHateoasAdder().addLink(dto))
                 .collect(Collectors.toList()));
     }
 
     @GetMapping("{id}")
     public ResponseEntity getById(@PathVariable Long id){
-        TagDto tagDto=TagDto.toDto(service.getById(id));
+        TagDto tagDto=mapper.map(service.getById(id), TagDto.class);
         hateoasAdder.addLink(tagDto);
         return ResponseEntity.ok(tagDto);
     }
 
     @PostMapping
     public ResponseEntity insert(@RequestBody TagDto dto){
-        TagDto tagDto=TagDto.toDto(service.insert(dto));
+        TagDto tagDto=mapper.map(service.insert(dto),TagDto.class);
         hateoasAdder.addLink(tagDto);
         return ResponseEntity.ok(tagDto);
 

@@ -15,6 +15,6 @@ public class BaseEntity extends RepresentationModel<BaseEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
 }

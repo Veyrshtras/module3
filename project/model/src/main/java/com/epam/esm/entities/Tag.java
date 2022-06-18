@@ -20,4 +20,7 @@ public class Tag extends BaseEntity {
     @Column(name = "name")//, unique = true)
     private String name;
 
+    public Tag(int i, String tagName3) {
+        super();
+    }
 }

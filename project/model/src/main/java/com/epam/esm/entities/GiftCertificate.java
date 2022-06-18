@@ -1,5 +1,6 @@
 package com.epam.esm.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +17,8 @@ import java.util.List;
 @Entity
 @Table(name = "gift_certificates", indexes = @Index(columnList = "name"))
 @EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
+
 public class GiftCertificate extends BaseEntity {
 
     @Column(name = "name")
@@ -42,11 +45,11 @@ public class GiftCertificate extends BaseEntity {
     @JoinTable(name = "gift_certificate_tags", joinColumns = @JoinColumn(nullable = false), inverseJoinColumns = @JoinColumn(nullable = false))
     private List<Tag> tags;
 
-    public <T> GiftCertificate(int i, String giftCertificate1, String description1, BigDecimal bigDecimal, int i1, LocalDateTime parse, LocalDateTime parse1, List<T> asList) {
-        super();
-    }
-
     public GiftCertificate() {
 
+    }
+
+    public <T> GiftCertificate(int i, String giftCertificate1, String description1, BigDecimal bigDecimal, int i1, LocalDateTime parse, LocalDateTime parse1, List<T> asList) {
+        super();
     }
 }

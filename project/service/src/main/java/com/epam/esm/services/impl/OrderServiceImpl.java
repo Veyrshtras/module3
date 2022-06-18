@@ -5,24 +5,32 @@ import com.epam.esm.entities.Order;
 import com.epam.esm.exceptions.ExceptionResult;
 import com.epam.esm.exceptions.IncorrectParameterException;
 import com.epam.esm.exceptions.NoSuchEntityException;
+import com.epam.esm.repositories.GiftCertificateRepository;
 import com.epam.esm.repositories.OrderRepository;
 import com.epam.esm.services.OrderService;
 import com.epam.esm.validations.IdValidation;
 import com.epam.esm.validations.OrderValidation;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository repository;
+    private final ModelMapper mapper;
+    private final GiftCertificateRepository giftCertificateRepository;
 
-    public OrderServiceImpl(OrderRepository repository) {
+    public OrderServiceImpl(OrderRepository repository, ModelMapper mapper, GiftCertificateRepository giftCertificateRepository) {
         this.repository = repository;
+        this.mapper = mapper;
+        this.giftCertificateRepository = giftCertificateRepository;
     }
 
     @Override
@@ -44,10 +52,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public Order insert(OrderDto dto) {
 
+        Order order =mapper.map(dto, Order.class);
+        order.setCost(giftCertificateRepository.findById(dto.getCertificateId()).get().getPrice());
+        order.setPurchaseTime(LocalDateTime.now());
+
         ExceptionResult er=new ExceptionResult();
-        Order order=OrderDto.fromDto(dto);
         OrderValidation.validate(order,er);
         if (!er.getExceptionMessages().isEmpty()){
             throw new IncorrectParameterException(er);
@@ -58,6 +70,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean delete(Long id) {
+
         ExceptionResult er=new ExceptionResult();
         IdValidation.validateId(id, er);
         if (!er.getExceptionMessages().isEmpty()){

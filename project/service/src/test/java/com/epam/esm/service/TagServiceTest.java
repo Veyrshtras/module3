@@ -1,6 +1,6 @@
 package com.epam.esm.service;
 
-import com.epam.esm.EntitiesTest;
+import com.epam.esm.EntitiesForServicesTest;
 import com.epam.esm.dtos.TagDto;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.services.TagService;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
@@ -22,32 +23,34 @@ public class TagServiceTest {
 
     @Mock
     private final TagService service;
+    private final ModelMapper mapper;
 
-    public TagServiceTest(TagService service) {
+    public TagServiceTest(TagService service, ModelMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @Test
     public void getAllTest(){
 
         List<Tag> actual = (List<Tag>) service.getAll(Pageable.ofSize(10));
-        List<Tag> expected = Arrays.asList(EntitiesTest.TAG_1, EntitiesTest.TAG_2, EntitiesTest.TAG_3, EntitiesTest.TAG_4, EntitiesTest.TAG_5);
+        List<Tag> expected = Arrays.asList(EntitiesForServicesTest.TAG_1, EntitiesForServicesTest.TAG_2, EntitiesForServicesTest.TAG_3, EntitiesForServicesTest.TAG_4, EntitiesForServicesTest.TAG_5);
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void getByIdTest(){
-        Optional<Tag> actual = Optional.of(service.getById(EntitiesTest.TAG_3.getId()));
-        Optional<Tag> expected = Optional.of(EntitiesTest.TAG_3);
+        Optional<Tag> actual = Optional.of(service.getById(EntitiesForServicesTest.TAG_3.getId()));
+        Optional<Tag> expected = Optional.of(EntitiesForServicesTest.TAG_3);
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void insertTest(){
-        Assertions.assertEquals(service.insert(TagDto.toDto(EntitiesTest.TAG_2)),EntitiesTest.TAG_2);
-        Assertions.assertEquals(service.insert(TagDto.toDto(EntitiesTest.TAG_3)),EntitiesTest.TAG_3);
+        Assertions.assertEquals(service.insert(mapper.map(EntitiesForServicesTest.TAG_2, TagDto.class)), EntitiesForServicesTest.TAG_2);
+        Assertions.assertEquals(service.insert(mapper.map(EntitiesForServicesTest.TAG_3, TagDto.class)), EntitiesForServicesTest.TAG_3);
     }
 
 
@@ -61,8 +64,8 @@ public class TagServiceTest {
     @Test
     public void getMostPopularTagOfUserWithHighestCostOfAllOrdersTest(){
 
-        Optional<Tag> actual = Optional.of(TagDto.fromDto(service.getMostPopularTagOfUserWithHighestCostOfAllOrders()));
-        Optional<Tag> expected = Optional.of(EntitiesTest.TAG_2);
+        Optional<Tag> actual = Optional.of(mapper.map(service.getMostPopularTagOfUserWithHighestCostOfAllOrders(), Tag.class));
+        Optional<Tag> expected = Optional.of(EntitiesForServicesTest.TAG_2);
 
         assertEquals(expected, actual);
     }
