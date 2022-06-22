@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -38,11 +40,12 @@ public class UserServiceImpl implements UserService {
             throw new IncorrectParameterException(er);
         }
 
-        if (!repository.findById(id).isPresent()){
+        Optional<User> user=repository.findById(id);
+        if (!user.isPresent()){
             throw new NoSuchEntityException(ExceptionMessagesKeys.USER_NOT_FOUND);
         }
 
-        return repository.findById(id).get();
+        return user.get();
     }
 
     @Override

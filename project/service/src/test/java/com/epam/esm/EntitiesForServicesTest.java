@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class EntitiesForServicesTest {
-    // TODO: 17.06.2022 I should check test 
     //GC
     public static final GiftCertificate GIFT_CERTIFICATE_1 = new GiftCertificate(1, "giftCertificate1",
             "description1", new BigDecimal("10.10"), 1, LocalDateTime.parse("2020-08-29T06:12:15"),

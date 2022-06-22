@@ -1,6 +1,7 @@
 package com.epam.esm.services.impl;
 
 import com.epam.esm.dtos.OrderDto;
+import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Order;
 import com.epam.esm.exceptions.ExceptionResult;
 import com.epam.esm.exceptions.IncorrectParameterException;
@@ -18,7 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.epam.esm.exceptions.ExceptionMessagesKeys.GIFT_CERTIFICATE_NOT_FOUND;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -45,10 +49,11 @@ public class OrderServiceImpl implements OrderService {
         if (!er.getExceptionMessages().isEmpty()){
             throw new IncorrectParameterException(er);
         }
-        if (!repository.findById(id).isPresent()){
+        Optional<Order> order=repository.findById(id);
+        if (!order.isPresent()){
             throw new NoSuchEntityException();
         }
-        return repository.findById(id).get();
+        return order.get();
     }
 
     @Override
@@ -76,7 +81,10 @@ public class OrderServiceImpl implements OrderService {
         if (!er.getExceptionMessages().isEmpty()){
             throw new IncorrectParameterException(er);
         }
-
+        Optional<Order> order=repository.findById(id);
+        if(!order.isPresent()){
+            throw new NoSuchEntityException(GIFT_CERTIFICATE_NOT_FOUND);
+        }
         repository.deleteById(id);
         return true;
     }

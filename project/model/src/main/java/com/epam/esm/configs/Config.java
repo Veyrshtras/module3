@@ -15,7 +15,6 @@ import javax.persistence.PersistenceContext;
 @Getter
 @Configuration
 @EntityScan(basePackages = "com.epam.esm")
-// TODO: 17.06.2022 change name of class to Configs 
 public class Config {
 
     @Bean

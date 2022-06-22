@@ -23,4 +23,9 @@ public class Tag extends BaseEntity {
     public Tag(int i, String tagName3) {
         super();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getName().equals(((Tag)obj).getName());
+    }
 }

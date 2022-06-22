@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -79,7 +80,8 @@ public class TagServiceImpl implements TagService {
             throw new IncorrectParameterException(er);
         }
 
-        if (!repository.findById(id).isPresent()){
+        Optional<Tag> tag=repository.findById(id);
+        if (!tag.isPresent()){
             throw new NoSuchEntityException(ExceptionMessagesKeys.TAG_NOT_FOUND);
         }
         repository.deleteById(id);
@@ -94,17 +96,17 @@ public class TagServiceImpl implements TagService {
             throw new IncorrectParameterException(er);
         }
 
-        if (!repository.findById(id).isPresent()){
+        Optional<Tag> tag=repository.findById(id);
+        if (!tag.isPresent()){
             throw new NoSuchEntityException(ExceptionMessagesKeys.TAG_NOT_FOUND);
         }
-        return repository.findById(id).get();
+        return tag.get();
     }
 
     @Override
     @Transactional
     public TagDto getMostPopularTagOfUserWithHighestCostOfAllOrders() {
 
-        //todo loose new DbConfig
         return mapper.map(entityManager
                 .createNativeQuery( FIND_MOST_WIDELY_USED_TAG_OF_USER_WITH_HIGHEST_COST_OF_ALL_ORDERS_QUERY,Tag.class)
                 .getResultList()

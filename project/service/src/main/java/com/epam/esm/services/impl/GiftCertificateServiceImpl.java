@@ -54,11 +54,11 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         if (!er.getExceptionMessages().isEmpty()){
             throw new IncorrectParameterException(er);
         }
-
-        if(!repository.findById(id).isPresent()){
+        Optional<GiftCertificate> giftCertificate=repository.findById(id);
+        if(!giftCertificate.isPresent()){
             throw new NoSuchEntityException(GIFT_CERTIFICATE_NOT_FOUND);
         }
-        return repository.findById(id).get();
+        return giftCertificate.get();
     }
 
     @Override

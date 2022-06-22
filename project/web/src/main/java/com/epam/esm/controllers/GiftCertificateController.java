@@ -75,7 +75,6 @@ public class GiftCertificateController {
     }
 
 
-    // TODO: 17.06.2022 I fix it. 
     @GetMapping("/search")
     public ResponseEntity searchGiftCertificateByTags(@RequestBody List<Tag> tags, Pageable pageable ){
         return ResponseEntity.ok(service.searchGiftCertificateByTags(tags, pageable)
