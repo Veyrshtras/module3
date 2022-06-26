@@ -26,6 +26,10 @@ public class Tag extends BaseEntity {
 
     @Override
     public boolean equals(Object obj) {
+        if (this==obj)
+            return true;
+        if(!(obj instanceof Tag))
+            return false;
         return this.getName().equals(((Tag)obj).getName());
     }
 }

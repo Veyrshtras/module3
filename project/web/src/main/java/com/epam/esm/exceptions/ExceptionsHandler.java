@@ -27,14 +27,14 @@ public class ExceptionsHandler {
     @ExceptionHandler(DuplicateEntityException.class)
     public final String handleDuplicateEntityExceptions(DuplicateEntityException ex) {
         String details = Translator.toLocale(ex.getLocalizedMessage());
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(CONFLICT, CONFLICT_EXCEPTION.toString(), details);
+        ErrorResponse errorResponse = new ErrorResponse(CONFLICT, CONFLICT_EXCEPTION.toString(), details);
         return errorResponse.toString();
     }
 
     @ExceptionHandler(NoSuchEntityException.class)
     public final String handleNoSuchEntityExceptions(NoSuchEntityException ex) {
         String details = Translator.toLocale(ex.getLocalizedMessage());
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(NOT_FOUND, NOT_FOUND_EXCEPTION.toString(), details);
+        ErrorResponse errorResponse = new ErrorResponse(NOT_FOUND, NOT_FOUND_EXCEPTION.toString(), details);
         return errorResponse.toString();
     }
 
@@ -49,35 +49,35 @@ public class ExceptionsHandler {
             details.append(detail).append(' ');
         }
 
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(BAD_REQUEST, BAD_REQUEST_EXCEPTION.toString(), details.toString());
+        ErrorResponse errorResponse = new ErrorResponse(BAD_REQUEST, BAD_REQUEST_EXCEPTION.toString(), details.toString());
         return errorResponse.toString();
     }
 
     @ExceptionHandler(UnsupportedOperationException.class)
     public final String handleUnsupportedOperationExceptions() {
         String details = Translator.toLocale("exception.unsupportedOperation");
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(METHOD_NOT_ALLOWED, METHOD_NOT_ALLOWED_EXCEPTION.toString(), details);
+        ErrorResponse errorResponse = new ErrorResponse(METHOD_NOT_ALLOWED, METHOD_NOT_ALLOWED_EXCEPTION.toString(), details);
         return errorResponse.toString();
     }
 
     @ExceptionHandler({MethodArgumentTypeMismatchException.class, JsonProcessingException.class})
     public final String handleBadRequestExceptions() {
         String details = Translator.toLocale("exception.badRequest");
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(BAD_REQUEST, BAD_REQUEST_EXCEPTION.toString(), details);
+        ErrorResponse errorResponse = new ErrorResponse(BAD_REQUEST, BAD_REQUEST_EXCEPTION.toString(), details);
         return errorResponse.toString();
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public final String handleBadRequestException() {
         String details = Translator.toLocale("exception.noHandler");
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(NOT_FOUND, NOT_FOUND_EXCEPTION.toString(), details);
+        ErrorResponse errorResponse = new ErrorResponse(NOT_FOUND, NOT_FOUND_EXCEPTION.toString(), details);
         return errorResponse.toString();
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public final String methodNotAllowedExceptionException() {
         String details = Translator.toLocale("exception.notSupported");
-        com.epam.esm.exceptions.ErrorResponse errorResponse = new com.epam.esm.exceptions.ErrorResponse(METHOD_NOT_ALLOWED, METHOD_NOT_ALLOWED_EXCEPTION.toString(), details);
+        ErrorResponse errorResponse = new ErrorResponse(METHOD_NOT_ALLOWED, METHOD_NOT_ALLOWED_EXCEPTION.toString(), details);
         return errorResponse.toString();
     }
 }

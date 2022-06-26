@@ -49,7 +49,7 @@ create table if not exists users
 -- -----------------------------------------------------
 -- Table module3test.order
 -- -----------------------------------------------------
-create table if not exists order
+create table if not exists orders
 (
     id                  bigint  auto_increment,
     price               decimal(8, 2)  not null,

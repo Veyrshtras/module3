@@ -12,6 +12,7 @@ public class OrderValidation {
 
     public void validate(Order order, ExceptionResult er) {
         IdValidation.validateExistenceOfId(order.getId(), er);
+        if(order.getUser()==null)return;
         validateUserId(order.getUser().getId(), er);
         validateGiftCertificateId(order.getCertificate().getId(), er);
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/REST-API-Advanced-Module3.iml" filepath="$PROJECT_DIR$/.idea/modules/REST-API-Advanced-Module3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/REST-API-Advanced-Module3.main.iml" filepath="$PROJECT_DIR$/.idea/modules/REST-API-Advanced-Module3.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model/REST-API-Advanced-Module3.model.iml" filepath="$PROJECT_DIR$/.idea/modules/model/REST-API-Advanced-Module3.model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model/REST-API-Advanced-Module3.model.main.iml" filepath="$PROJECT_DIR$/.idea/modules/model/REST-API-Advanced-Module3.model.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model/REST-API-Advanced-Module3.model.test.iml" filepath="$PROJECT_DIR$/.idea/modules/model/REST-API-Advanced-Module3.model.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistence/REST-API-Advanced-Module3.persistence.iml" filepath="$PROJECT_DIR$/.idea/modules/persistence/REST-API-Advanced-Module3.persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistence/REST-API-Advanced-Module3.persistence.main.iml" filepath="$PROJECT_DIR$/.idea/modules/persistence/REST-API-Advanced-Module3.persistence.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistence/REST-API-Advanced-Module3.persistence.test.iml" filepath="$PROJECT_DIR$/.idea/modules/persistence/REST-API-Advanced-Module3.persistence.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service/REST-API-Advanced-Module3.service.iml" filepath="$PROJECT_DIR$/.idea/modules/service/REST-API-Advanced-Module3.service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service/REST-API-Advanced-Module3.service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/service/REST-API-Advanced-Module3.service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service/REST-API-Advanced-Module3.service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/service/REST-API-Advanced-Module3.service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/REST-API-Advanced-Module3.test.iml" filepath="$PROJECT_DIR$/.idea/modules/REST-API-Advanced-Module3.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web/REST-API-Advanced-Module3.web.iml" filepath="$PROJECT_DIR$/.idea/modules/web/REST-API-Advanced-Module3.web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web/REST-API-Advanced-Module3.web.main.iml" filepath="$PROJECT_DIR$/.idea/modules/web/REST-API-Advanced-Module3.web.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web/REST-API-Advanced-Module3.web.test.iml" filepath="$PROJECT_DIR$/.idea/modules/web/REST-API-Advanced-Module3.web.test.iml" />
+    </modules>
+  </component>
+</project>

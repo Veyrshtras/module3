@@ -26,8 +26,7 @@ public class EntitiesForValidationsTest {
 
 
     //IdValidation
-    public static final String INCORRECT_SORT_TYPE = "sort";
-    public static final String CORRECT_SORT_TYPE = "ASC";
+
     public static final long INCORRECT_ID = -15;
     public static final long CORRECT_ID = 15;
 

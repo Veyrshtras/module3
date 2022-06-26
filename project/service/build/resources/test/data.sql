@@ -45,11 +45,11 @@ INSERT INTO users(name)
 VALUES ('name2');
 
 /* --------------filling in the table "order"---------------------*/
-INSERT INTO order(price, purchase_time, user_id, gift_certificate_id)
+INSERT INTO orders(price, purchase_time, user_id, gift_certificate_id)
 VALUES (10.1, '2018-08-29T06:12:15', 1, 1);
 
-INSERT INTO order(price, purchase_time, user_id, gift_certificate_id)
+INSERT INTO orders(price, purchase_time, user_id, gift_certificate_id)
 VALUES (30.3, '2018-08-29T06:12:15', 1, 2);
 
-INSERT INTO order(price, purchase_time, user_id, gift_certificate_id)
+INSERT INTO orders(price, purchase_time, user_id, gift_certificate_id)
 VALUES (20.2, '2018-08-29T06:12:15', 2, 3);

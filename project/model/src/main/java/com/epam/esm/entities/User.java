@@ -19,11 +19,8 @@ public class User extends BaseEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Order> order;
 
-    public User(int i, String name1) {
-        super();
-    }
-    public User(){
-
-    }
+    public User(){ }
+    public User(String name){};
+    public User(int id, String name) { }
 
 }

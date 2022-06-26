@@ -3,7 +3,7 @@ package com.epam.esm.validation;
 import com.epam.esm.EntitiesForValidationsTest;
 import com.epam.esm.exceptions.ExceptionResult;
 import com.epam.esm.validations.IdValidation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

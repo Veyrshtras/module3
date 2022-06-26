@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-hateoas:2.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-hateoas/2.7.0/ab79af10f4047f7a16ec888486b52b457f834364/spring-boot-starter-hateoas-2.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-hateoas/2.7.0/9cedd15dfd6f429d389c5411128b4c77ce25acfd/spring-boot-starter-hateoas-2.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
