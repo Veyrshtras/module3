@@ -11,7 +11,6 @@ public class OrderValidation {
     private final int MIN_ID = 1;
 
     public void validate(Order order, ExceptionResult er) {
-        IdValidation.validateExistenceOfId(order.getId(), er);
         if(order.getUser()==null)return;
         validateUserId(order.getUser().getId(), er);
         validateGiftCertificateId(order.getCertificate().getId(), er);

@@ -1,6 +1,5 @@
 package com.epam.esm.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,15 +12,19 @@ import javax.persistence.*;
 @Entity
 @Table( indexes = @Index(columnList = "name"))
 @EntityListeners(AuditingEntityListener.class)
-@AllArgsConstructor
 @NoArgsConstructor
 public class Tag extends BaseEntity {
 
     @Column(name = "name")//, unique = true)
     private String name;
 
-    public Tag(int i, String tagName3) {
-        super();
+    public Tag(long id, String name) {
+        super(id);
+        this.name = name;
+    }
+
+    public Tag(String name) {
+        this.name = name;
     }
 
     @Override

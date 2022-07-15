@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -32,9 +31,14 @@ public class Order extends BaseEntity{
     @JoinColumn(nullable = false)
     private GiftCertificate certificate;
 
-    public Order(int i, BigDecimal bigDecimal, LocalDateTime parse, User user1, GiftCertificate giftCertificate1) {
-        super();
+    public Order(long id, BigDecimal cost, LocalDateTime purchaseTime, User user, GiftCertificate certificate) {
+        super(id);
+        this.cost = cost;
+        this.purchaseTime = purchaseTime;
+        this.user = user;
+        this.certificate = certificate;
     }
+
     public Order(){
 
     }

@@ -1,7 +1,6 @@
 package com.epam.esm.services.impl;
 
 import com.epam.esm.dtos.OrderDto;
-import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Order;
 import com.epam.esm.exceptions.ExceptionResult;
 import com.epam.esm.exceptions.IncorrectParameterException;

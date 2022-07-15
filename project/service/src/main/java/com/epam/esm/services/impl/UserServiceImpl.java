@@ -9,7 +9,6 @@ import com.epam.esm.exceptions.NoSuchEntityException;
 import com.epam.esm.repositories.UserRepository;
 import com.epam.esm.services.UserService;
 import com.epam.esm.validations.IdValidation;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,11 +19,9 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
-    private final ModelMapper mapper;
 
-    public UserServiceImpl(UserRepository repository, ModelMapper mapper) {
+    public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
-        this.mapper = mapper;
     }
 
     @Override

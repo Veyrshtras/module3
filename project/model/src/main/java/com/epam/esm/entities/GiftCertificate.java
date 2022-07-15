@@ -49,7 +49,17 @@ public class GiftCertificate extends BaseEntity {
 
     }
 
-    public <T> GiftCertificate(int i, String giftCertificate1, String description1, BigDecimal bigDecimal, int i1, LocalDateTime parse, LocalDateTime parse1, List<T> asList) {
-        super();
+    public GiftCertificate(long id, String name, String description, BigDecimal price,
+                           int duration, LocalDateTime createDate, LocalDateTime lastUpdateDate, List<Tag> tags) {
+        super(id);
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.duration = duration;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.tags = tags;
     }
+
+
 }

@@ -14,27 +14,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Service
 public class TagServiceImpl implements TagService {
 
-
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
-
-
-    private String FIND_MOST_WIDELY_USED_TAG_OF_USER_WITH_HIGHEST_COST_OF_ALL_ORDERS_QUERY ="SELECT * FROM tag WHERE tag.id IN " +
-            "(SELECT tags_id FROM" +
-            "(SELECT certificate_id from orders WHERE user_id = " +
-            "(SELECT user_id FROM orders GROUP BY user_id ORDER BY SUM(cost) DESC LIMIT 1 )) AS tableA  " +
-            " INNER JOIN gift_certificate_tags ON gift_certificate_tags.gift_certificate_id = tableA.certificate_id " +
-            " GROUP BY tags_id " +
-            " order by count(tags_id) desc limit 1)";
 
     private final TagRepository repository;
     private final ModelMapper mapper;
@@ -107,9 +91,6 @@ public class TagServiceImpl implements TagService {
     @Transactional
     public TagDto getMostPopularTagOfUserWithHighestCostOfAllOrders() {
 
-        return mapper.map(entityManager
-                .createNativeQuery( FIND_MOST_WIDELY_USED_TAG_OF_USER_WITH_HIGHEST_COST_OF_ALL_ORDERS_QUERY,Tag.class)
-                .getResultList()
-                .stream().findFirst().get(), TagDto.class);
+        return mapper.map(repository.getMostPopularTagOfUserWithHighestCostOfAllOrders(), TagDto.class);
     }
 }

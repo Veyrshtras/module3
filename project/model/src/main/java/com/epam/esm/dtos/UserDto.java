@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class UserDto extends RepresentationModel<UserDto> {
 
-    private Long id;
+    private long id;
     private String name;
     private List<OrderDto> order;
 

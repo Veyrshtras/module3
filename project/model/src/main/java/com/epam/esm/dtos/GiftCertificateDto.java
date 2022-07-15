@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class GiftCertificateDto extends RepresentationModel<GiftCertificateDto> {
 
-    private Long id;
+    private long id;
     private String name;
     private String description;
     private BigDecimal price;

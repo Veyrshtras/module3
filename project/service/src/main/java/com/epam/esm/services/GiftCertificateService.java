@@ -14,13 +14,13 @@ public interface GiftCertificateService {
 
     Page<GiftCertificate> getAll(Pageable pageable);
 
-    GiftCertificate getById(Long id);
+    GiftCertificate getById(long id);
 
     GiftCertificate insert(GiftCertificateDto dto);
 
-    GiftCertificateDto update(Long id, GiftCertificateDto dto);
+    GiftCertificateDto update(long id, GiftCertificateDto dto);
 
-    boolean delete(Long id);
+    boolean delete(long id);
 
     Page<GiftCertificate> searchGiftCertificateByTags(List<Tag> tags, Pageable pageable);
 

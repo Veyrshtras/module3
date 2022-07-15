@@ -4,11 +4,11 @@ import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.exceptions.ExceptionResult;
 import lombok.experimental.UtilityClass;
-import static com.epam.esm.exceptions.ExceptionMessagesKeys.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
+
+import static com.epam.esm.exceptions.ExceptionMessagesKeys.*;
 
 @UtilityClass
 public class GiftCertificateValidation {
@@ -24,11 +24,13 @@ public class GiftCertificateValidation {
 
 
     public void validate(GiftCertificate giftCertificate, ExceptionResult er) {
-        validateName(giftCertificate.getName(), er);
-        validateDescription(giftCertificate.getDescription(), er);
-        validatePrice(giftCertificate.getPrice(), er);
-        validateDuration(giftCertificate.getDuration(), er);
-        validateListOfTags(giftCertificate.getTags(), er);
+        if(giftCertificate!=null){
+            validateName(giftCertificate.getName(), er);
+            validateDescription(giftCertificate.getDescription(), er);
+            validatePrice(giftCertificate.getPrice(), er);
+            validateDuration(giftCertificate.getDuration(), er);
+            validateListOfTags(giftCertificate.getTags(), er);
+        }
     }
 
     public void validateForUpdate(GiftCertificate giftCertificate, ExceptionResult er) {

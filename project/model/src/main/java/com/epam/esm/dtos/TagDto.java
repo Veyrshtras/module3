@@ -8,6 +8,6 @@ import org.springframework.hateoas.RepresentationModel;
 @Setter
 public class TagDto extends RepresentationModel<TagDto> {
 
-    private Long id;
+    private long id;
     private String name;
 }

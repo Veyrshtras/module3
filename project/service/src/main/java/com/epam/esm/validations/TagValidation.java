@@ -14,7 +14,6 @@ public class TagValidation {
 
 
     public void validate(Tag tag, ExceptionResult er) {
-//        IdValidation.validateExistenceOfId(tag.getId(), er);
         validateName(tag.getName(), er);
     }
 

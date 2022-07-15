@@ -16,11 +16,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import static com.epam.esm.exceptions.ExceptionMessagesKeys.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.epam.esm.exceptions.ExceptionMessagesKeys.GIFT_CERTIFICATE_NOT_FOUND;
 
 @Service
 public class GiftCertificateServiceImpl implements GiftCertificateService {
@@ -46,7 +48,8 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     }
 
     @Override
-    public GiftCertificate getById(Long id) {
+    @Transactional
+    public GiftCertificate getById(long id) {
 
         ExceptionResult er=new ExceptionResult();
         IdValidation.validateId(id, er);
@@ -66,6 +69,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     public GiftCertificate insert(GiftCertificateDto dto) {
 
         ExceptionResult er=new ExceptionResult();
+
         GiftCertificate giftCertificate=mapper.map(dto, GiftCertificate.class);
 
         GiftCertificateValidation.validate(giftCertificate, er);
@@ -73,17 +77,18 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         if (!er.getExceptionMessages().isEmpty()){
             throw new IncorrectParameterException(er);
         }
-
-        if (repository.findByName(giftCertificate.getName()).isPresent()) {
+        String giftCertName = giftCertificate.getName();
+        Optional<GiftCertificate> giftCertificate1 = repository.findByName(giftCertName);
+        if (giftCertificate1.isPresent()) {
             throw new DuplicateEntityException(ExceptionMessagesKeys.GIFT_CERTIFICATE_EXIST);
         }
-
         return repository.save(giftCertificate);
     }
 
+
     @Override
     @Transactional
-    public GiftCertificateDto update(Long id, GiftCertificateDto dto) {
+    public GiftCertificateDto update(long id, GiftCertificateDto dto) {
 
         ExceptionResult er=new ExceptionResult();
         GiftCertificate giftCertificate=mapper.map(dto, GiftCertificate.class);
@@ -110,7 +115,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
 
     @Override
     @Transactional
-    public boolean delete(Long id) {
+    public boolean delete(long id) {
         ExceptionResult er=new ExceptionResult();
         IdValidation.validateId(id, er);
         if (!er.getExceptionMessages().isEmpty()){
