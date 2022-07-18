@@ -40,10 +40,6 @@ public class GiftCertificateServiceTest {
 
     Pageable pageable= PageRequest.of(0,5);
 
-    @BeforeEach
-    void setup(){
-        this.service=new GiftCertificateServiceImpl(repository, mapper);
-    }
 
     @Test
     public void getAllTest() {

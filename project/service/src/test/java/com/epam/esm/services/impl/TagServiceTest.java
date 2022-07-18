@@ -42,11 +42,7 @@ public class TagServiceTest {
     @InjectMocks
     private TagServiceImpl service;
 
-    @BeforeEach
-    void setup(){
-        this.service=new TagServiceImpl(repository, mapper);
-    }
-   Pageable pageable= PageRequest.of(0,5);
+    Pageable pageable= PageRequest.of(0,5);
 
     @Test
     public void getAllTest(){

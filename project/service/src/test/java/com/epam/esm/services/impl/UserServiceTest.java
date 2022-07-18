@@ -31,11 +31,6 @@ public class UserServiceTest {
     @InjectMocks
     private UserServiceImpl service;
 
-    @BeforeEach
-    void setup(){
-        this.service=new UserServiceImpl(repository);
-    }
-
     Pageable pageable= PageRequest.of(0,5);
 
     @Test

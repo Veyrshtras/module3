@@ -39,10 +39,6 @@ public class OrderServiceTest {
     @InjectMocks
     private OrderServiceImpl service;
 
-    @BeforeEach
-    void setup(){
-        this.service=new OrderServiceImpl(repository, mapper, giftCertificateRepository);
-    }
 
     Pageable pageable= PageRequest.of(0,5);
 
