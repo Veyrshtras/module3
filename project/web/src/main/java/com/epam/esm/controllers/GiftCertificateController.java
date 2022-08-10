@@ -9,6 +9,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,6 +70,7 @@ public class GiftCertificateController {
     }
 
     @GetMapping("{id}")
+    @Transactional
     public ResponseEntity getById(@PathVariable Long id){
 
         GiftCertificate giftCertificate=service.getById(id);

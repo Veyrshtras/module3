@@ -7,6 +7,7 @@ import com.epam.esm.exceptions.IncorrectParameterException;
 import com.epam.esm.exceptions.NoSuchEntityException;
 import com.epam.esm.repositories.GiftCertificateRepository;
 import com.epam.esm.repositories.OrderRepository;
+import com.epam.esm.repositories.UserRepository;
 import com.epam.esm.services.OrderService;
 import com.epam.esm.validations.IdValidation;
 import com.epam.esm.validations.OrderValidation;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public Order insert(OrderDto dto) {
 
         Order order =mapper.map(dto, Order.class);
